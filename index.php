@@ -1,5 +1,7 @@
 <?php
 
+require_once 'file.php';
+
 $data = array_fill(0, 3, null);
 $argv = array_replace($data, $argv);
 list($filename, $command, $content) = $argv;
