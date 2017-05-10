@@ -1,6 +1,7 @@
 <?php
 
-require_once 'file.php';
+define('FILENAME', 'data.txt');
+require_once 'functions.php';
 
 $data = array_fill(0, 3, null);
 $argv = array_replace($data, $argv);
@@ -14,7 +15,11 @@ switch ($command) {
         echo 'Remove TODO';
         break;
     case null:
-        echo 'List';
+        $tasks = readFromFile();
+        foreach ($tasks as $number => $task) {
+            echo ($number + 1).' | '.$task.PHP_EOL;
+        }
+        echo '-----'.PHP_EOL.'All tasks: '.count($tasks);
         break;
     default:
         echo 'Sorry, invalid command!';
