@@ -9,11 +9,19 @@ list($filename, $command, $content) = $argv;
 
 switch ($command) {
     case 'add':
-        echo 'Add TODO';
+        if (!empty($content)) {
+            $tasks = add($content);
+            saveToFile($tasks);
+        } else {
+            echo '! Error: Task can\'t be empty.';
+        }
         break;
+
     case 'remove':
-        echo 'Remove TODO';
+        $tasks = remove($content);
+        saveToFile($tasks);
         break;
+
     case null:
         $tasks = readFromFile();
         foreach ($tasks as $number => $task) {
@@ -21,6 +29,7 @@ switch ($command) {
         }
         echo '-----'.PHP_EOL.'All tasks: '.count($tasks);
         break;
+
     default:
         echo 'Sorry, invalid command!';
         break;
